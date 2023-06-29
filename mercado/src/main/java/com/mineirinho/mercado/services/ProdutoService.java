@@ -2,6 +2,7 @@ package com.mineirinho.mercado.services;
 
 import com.mineirinho.mercado.dto.ProdutoDTO;
 import com.mineirinho.mercado.model.Produto;
+import com.mineirinho.mercado.model.exception.BadRequestException;
 import com.mineirinho.mercado.model.exception.ResourceNotFoundException;
 import com.mineirinho.mercado.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
@@ -84,7 +85,13 @@ public class ProdutoService {
         produtoDto.setId(id);
         ModelMapper mapper = new ModelMapper();
         Produto produto = mapper.map(produtoDto, Produto.class);
-        produtoRepository.save(produto);
+
+        try {
+            produtoRepository.save(produto);
+        } catch (BadRequestException ex) {
+            ex.getMessage();
+        }
+
 
         return produtoDto;
     }

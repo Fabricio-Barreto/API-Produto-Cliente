@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/produtos")
 @Tag(name = "Product", description = "Endpoints for Managing products")
+//@CrossOrigin(origins = "http://localhost:8083")
 public class ProdutoController {
 
     @Autowired
@@ -65,7 +66,7 @@ public class ProdutoController {
 
     @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Add a new product", description = "Add a new product by passing in a JSON or XML", tags = "Product", responses = {
-            @ApiResponse(description = "Success", responseCode = "200",
+            @ApiResponse(description = "Created", responseCode = "201",
                     content = @Content(schema = @Schema(implementation = ProdutoResponse.class))
             ),
             @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
